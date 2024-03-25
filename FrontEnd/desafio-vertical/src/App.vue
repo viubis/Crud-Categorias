@@ -25,7 +25,6 @@ export default {
 @media (min-width: 800px)  {
   .container {
     font-family: 'Jost', sans-serif;
-    height: 100vh;
     gap: 10px;
   }
 }
