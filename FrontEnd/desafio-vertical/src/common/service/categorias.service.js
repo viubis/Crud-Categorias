@@ -10,7 +10,6 @@ const CategoriasService = {
         return data;
     },
     async remover(id){
-        console.log(id);
         let response = await ApiService.delete('Categoria/remover', id);
         return response;
     },

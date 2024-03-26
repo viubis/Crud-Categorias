@@ -63,8 +63,6 @@ export default {
     async listarCategorias() {
       const response= await CategoriasService.listar();
       this.listaCategorias = response.data;
-      console.log(this.listaCategorias);
-      console.log(response);
     },
     reloadPage() {
       window.location.reload();
@@ -97,19 +95,11 @@ export default {
   overflow-y: scroll; 
 }
 
-.detail{
-  display: none;
-}
-
 .table-header{
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-left: 20px;
-}
-
-.button-add-responsive{
-  display: none;
 }
 
 .table-header h2,h3,h4{

@@ -24,7 +24,6 @@ const ApiService = {
     list(resource){
         this.init();
         return app.axios.get(`${resource}`).then((data) => {
-            console.log(data);
             return data;
         })
         .catch((error) => {
