@@ -3,7 +3,8 @@
     <main>
       <div class="header">        
         <div class="header-header">
-          <h2>Adicionar Categorias</h2>
+          <h2 v-if="!this.id">Adicionar Categorias</h2>
+          <h2 v-else>Editar Categorias</h2>
           <router-link to="/"><button class="button-back">Voltar</button></router-link>
         </div>
       </div>

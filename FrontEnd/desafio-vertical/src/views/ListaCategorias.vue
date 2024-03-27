@@ -56,7 +56,10 @@ export default {
       ButtonEdit, 
       ButtonDelete,
     },
-  async mounted(){
+  mounted(){
+    this.listarCategorias();
+  },
+  created(){
     this.listarCategorias();
   },
   methods: { 
@@ -66,11 +69,12 @@ export default {
     },
     reloadPage() {
       window.location.reload();
+      this.listarCategorias();
     },
     async remover(id){
       const confirmDelete = window.confirm("Deseja realmente excluir a Categoria?");
       if(confirmDelete){
-        CategoriasService.remover(id);
+        await CategoriasService.remover(id);
         this.reloadPage();
       }
     },
