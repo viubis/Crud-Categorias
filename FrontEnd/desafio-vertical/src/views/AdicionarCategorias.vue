@@ -10,7 +10,7 @@
       <div class="form">
         <form class="form" id="form">
           <div class="field">
-            <input-text label="Código" v-model="codigo" :value="codigo" ref="codigo" required />
+            <input-number label="Código" v-model="codigo" :value="codigo" ref="codigo" required />
           </div>
           <div class="field">
             <input-text label="Título" required v-model="titulo" ref="titulo" :value="titulo"/>
@@ -18,7 +18,7 @@
           <div class="field">
             <input-text-area label="Descrição" required v-model="descricao" ref="descricao" :value="descricao"/>
           </div>
-          <button-save type="submit" @click.prevent="addCustomer()" />
+          <button-save type="submit" @click.prevent="addCategorias()" />
         </form>
       </div>
     </main>
@@ -29,21 +29,71 @@
 import InputTextArea from '@/components/inputs/InputTextArea.vue';
 import InputText from '@/components/inputs/InputText.vue';
 import { ButtonSave } from '@/components/buttons';
+import CategoriasService from '@/common/service/categorias.service';
+import InputNumber from '../components/inputs/InputNumber.vue';
 
 export default {
   name: 'AdicionarCategorias',
   components: {
     InputTextArea,
     InputText,
-    ButtonSave
+    ButtonSave,
+    InputNumber
   },
    data() {
       return {
         codigo: '',
         titulo: '',
         descricao: '',
-        id: '',
+        id: null,
         editar: ''
+      }
+    },methods: {
+      validateForm(){
+        let validate = [];
+        validate.push(this.$refs.titulo.validation());
+        validate.push(this.$refs.codigo.validation());
+        validate.push(this.$refs.descricao.validation());
+        return validate.filter((element) => element==false).length == 0;
+      },
+      addCategorias(){
+        console.log(this.id);
+        if(this.validateForm()){
+          if(this.id == undefined || this.id == null){
+            const body = {
+              codigo: this.codigo,
+              titulo: this.titulo,
+              descricao: this.descricao
+            }
+            CategoriasService.adicionar(body);
+            this.$router.push('/');
+            return;
+          } else{
+            const body = {
+              id: this.id,
+              codigo: this.codigo,
+              titulo: this.titulo,
+              descricao: this.descricao
+            }
+
+            CategoriasService.atualizar(body);
+            this.$router.push('/');
+            return
+          }
+        }
+        alert('Valide o formulario');
+      }
+    },
+    async mounted(){
+      this.id = this.$route.query.id;
+      this.editar = this.$route.query.editar;
+      if(this.id !== undefined && this.id !== null){
+        let response = await CategoriasService.obter(this.id);
+        this.titulo = response.data.data.titulo;
+        this.codigo = response.data.data.codigo;
+        this.descricao = response.data.data.descricao;
+      }else{
+        return;
       }
     },
 }

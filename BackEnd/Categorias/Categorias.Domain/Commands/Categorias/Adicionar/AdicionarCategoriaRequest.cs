@@ -7,6 +7,6 @@ namespace Categorias.Domain.Commands.Categorias.Adicionar
     {
         public int Codigo { get; set; }
         public string Titulo { get; set; }
-        public string Decricao { get; set; }
+        public string Descricao { get; set; }
     }
 }

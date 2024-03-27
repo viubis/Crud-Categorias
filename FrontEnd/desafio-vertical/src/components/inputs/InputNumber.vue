@@ -2,14 +2,14 @@
     <div>
         <div class="field">
             <label for="label">{{label}}</label>
-            <input type="text" class="input-field" v-model="content" @input="input" :class="validateInput">   
+            <input type="number" v-model="content" @input="input" :class="validateInput">   
             <small v-if="state == false">Preencha o campo {{ label }}.</small>
         </div>
    </div>
 </template>
 <script>
 export default {
-  name: "InputText",
+  name: "InputNumber",
   props: {
     label: String,
     value: { type: [String,Number], default: null},
@@ -63,10 +63,6 @@ export default {
     height: 38px;
     border: 1px solid #E5EBF1;
     border-radius: 4px;
-  }
-
-  .input-field{
-    padding: 2px;
   }
 
   .field-success {

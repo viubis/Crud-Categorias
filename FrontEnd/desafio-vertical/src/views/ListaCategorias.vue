@@ -74,9 +74,9 @@ export default {
         this.reloadPage();
       }
     },
-    edit(id){
+    editar(id){
       this.$router.push({
-        name: "AdicionarCategorias",
+        name: "Adicionar-Categoria",
         query: {id,editar: true}
       });
     }

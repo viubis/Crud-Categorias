@@ -26,7 +26,7 @@ namespace Categorias.Domain.Commands.AdicionarCategoria
                 return Task.FromResult(new CommandResponse(this));
             }
 
-            var categoria = new Categoria(request.Codigo, request.Titulo, request.Decricao);
+            var categoria = new Categoria(request.Codigo, request.Titulo, request.Descricao);
             AddNotifications(categoria);
 
             if (IsInvalid())

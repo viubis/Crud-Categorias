@@ -31,6 +31,7 @@ const ApiService = {
         })
     },
     post(resource, info){
+        console.log(resource, info);
         this.init();
         return app.axios.post(`${resource}`, info).then((data) => {
             return data;
